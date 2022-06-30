@@ -27,6 +27,7 @@ dependencies {
     implementation("org.postgresql:postgresql")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("com.vladmihalcea:hibernate-types-52:2.10.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

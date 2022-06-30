@@ -6,16 +6,13 @@ import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.Table
 
-@Entity
-@Table(name = "user")
-class User {
+@Entity()
+@Table(name = "artist")
+public class Artist {
     @Column(name = "id")
     @Id
     lateinit var id: UUID
 
-    @Column(name = "username")
-    lateinit var username: String
-
-    @Column(name = "email")
-    lateinit var email: String
+    @Column(name = "name")
+    lateinit var name: String
 }
