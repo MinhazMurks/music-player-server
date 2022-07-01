@@ -6,10 +6,8 @@ import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
-import javax.persistence.Table
 
-@Entity
-@Table(name = "feature")
+@Entity(name = "feature")
 class Feature {
     @Column(name = "id")
     @Id
@@ -19,6 +17,6 @@ class Feature {
     lateinit var artistUUID: UUID
 
     @ManyToOne
-    @JoinColumn(name = "song_id")
+    @JoinColumn(name = "song")
     var song: Song? = null
 }

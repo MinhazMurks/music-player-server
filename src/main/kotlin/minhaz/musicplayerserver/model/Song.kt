@@ -8,10 +8,8 @@ import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
-import javax.persistence.Table
 
-@Entity
-@Table(name = "song")
+@Entity(name = "song")
 class Song() {
     @Column(name = "id")
     @Id
@@ -23,8 +21,8 @@ class Song() {
     @Column(name = "name")
     lateinit var name: String
 
-    @ManyToOne()
-    @JoinColumn(name = "artist_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "artist")
     lateinit var artist: Artist
 
     @OneToMany(mappedBy = "song", fetch = FetchType.LAZY, orphanRemoval = false)

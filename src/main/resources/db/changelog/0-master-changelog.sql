@@ -31,8 +31,10 @@ CREATE TABLE IF NOT EXISTS feature
 (
     id              UUID DEFAULT uuid_generate_v4(),
     featured_artist UUID NOT NULL,
+    song            UUID NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (featured_artist) REFERENCES artist (id) ON UPDATE CASCADE ON DELETE RESTRICT
+    FOREIGN KEY (featured_artist) REFERENCES artist (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (song) REFERENCES song (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS playlist
