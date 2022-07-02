@@ -1,20 +1,20 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-CREATE TABLE IF NOT EXISTS "user"
+CREATE TABLE IF NOT EXISTS music_user
 (
     id       UUID DEFAULT uuid_generate_v4(),
-    username TEXT NOT NULL,
-    email    TEXT NOT NULL,
+    username TEXT NOT NULL UNIQUE,
+    email    TEXT NOT NULL UNIQUE,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS artist
 (
-    id     UUID DEFAULT uuid_generate_v4(),
-    "user" UUID NOT NULL,
-    name   TEXT NOT NULL,
+    id         UUID DEFAULT uuid_generate_v4(),
+    music_user UUID NOT NULL,
+    name       TEXT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY ("user") REFERENCES "user" (id) ON UPDATE CASCADE ON DELETE RESTRICT
+    FOREIGN KEY (music_user) REFERENCES music_user (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS song

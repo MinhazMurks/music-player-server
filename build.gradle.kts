@@ -4,8 +4,9 @@ plugins {
     id("org.liquibase.gradle") version "2.0.4"
     id("org.springframework.boot") version "2.7.1"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.6.21"
-    kotlin("plugin.spring") version "1.6.21"
+    id("org.jetbrains.kotlin.plugin.noarg") version "1.7.0"
+    kotlin("jvm") version "1.7.0"
+    kotlin("plugin.spring") version "1.7.0"
 }
 
 group = "minhaz"
@@ -30,6 +31,18 @@ dependencies {
     implementation("com.vladmihalcea:hibernate-types-52:2.10.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
+
+noArg {
+    annotation("javax.persistence.Entity")
+}
+
+buildscript {
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-noarg:1.7.0")
+    }
+}
+
+apply(plugin = "org.jetbrains.kotlin.plugin.noarg")
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {

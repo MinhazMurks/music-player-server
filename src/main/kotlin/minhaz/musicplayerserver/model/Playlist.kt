@@ -27,6 +27,7 @@ class Playlist() {
     @Type(type = "list-array")
     @Column(name = "tags", columnDefinition = "text[]")
     lateinit var tags: List<String>
+
     override fun toString(): String {
         return "Playlist(id=$id, name='$name', isPublic=$isPublic, tags=$tags)"
     }

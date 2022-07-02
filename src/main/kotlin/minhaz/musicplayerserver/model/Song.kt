@@ -27,4 +27,7 @@ class Song() {
 
     @OneToMany(mappedBy = "song", fetch = FetchType.LAZY, orphanRemoval = false)
     var features: MutableList<Feature> = mutableListOf()
+    override fun toString(): String {
+        return "Song(id=$id, audioFile='$audioFile', name='$name', artist=$artist, features=$features)"
+    }
 }

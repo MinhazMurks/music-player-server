@@ -19,4 +19,7 @@ class Feature {
     @ManyToOne
     @JoinColumn(name = "song")
     var song: Song? = null
+    override fun toString(): String {
+        return "Feature(id=$id, artistUUID=$artistUUID)"
+    }
 }
