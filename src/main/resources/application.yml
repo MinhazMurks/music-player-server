@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/music_db'
+    username: postgres
+    password: postgres
+  liquibase:
+    enabled: true
+    change-log: 'classpath:db/changelog/0-master-changelog.sql'
+cors:
+  origin-patterns: 'http://localhost:3000'
