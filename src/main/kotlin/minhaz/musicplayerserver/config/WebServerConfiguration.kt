@@ -10,18 +10,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 class WebServerConfiguration {
 
     @Value("\${cors.origin-patterns}")
-    private val corsOriginPatterns: String = ""
+    private val corsOriginPatterns: List<String> = mutableListOf()
 
     @Bean
     fun addCorsConfig(): WebMvcConfigurer {
-        println("IN HERE: $corsOriginPatterns")
         return object : WebMvcConfigurer {
             override fun addCorsMappings(registry: CorsRegistry) {
-                val allowedOrigins = corsOriginPatterns.split(",").toTypedArray()
-                registry.addMapping("/**")
-                    .allowedMethods("*")
-                    .allowedOriginPatterns(*allowedOrigins)
-                    .allowCredentials(true)
+                corsOriginPatterns.forEach {
+                    registry.addMapping("/**")
+                        .allowedMethods("*")
+                        .allowedOriginPatterns(it)
+                        .allowCredentials(true)
+                }
             }
         }
     }

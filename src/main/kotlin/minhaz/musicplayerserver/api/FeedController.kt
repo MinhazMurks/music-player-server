@@ -1,5 +1,6 @@
 package minhaz.musicplayerserver.api
 
+import minhaz.musicplayerserver.model.Playlist
 import minhaz.musicplayerserver.repository.ArtistRepository
 import minhaz.musicplayerserver.repository.FeatureRepository
 import minhaz.musicplayerserver.repository.MusicUserRepository
@@ -20,8 +21,9 @@ class FeedController(
     private val artistRepository: ArtistRepository
 ) {
     @GetMapping()
-    fun getFeed(): ResponseEntity<String> {
+    fun getFeed(): ResponseEntity<List<Playlist>> {
+        println(System.getenv())
 
-        return ResponseEntity.ok().body(playlistRepository.findAll().toString())
+        return ResponseEntity.ok().body(playlistRepository.findAll())
     }
 }
