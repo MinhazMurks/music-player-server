@@ -40,8 +40,40 @@ CREATE TABLE IF NOT EXISTS feature
 CREATE TABLE IF NOT EXISTS playlist
 (
     id        UUID   DEFAULT uuid_generate_v4(),
+    creator   UUID NOT NULL,
     name      TEXT NOT NULL,
     is_public BOOL   DEFAULT FALSE,
     tags      TEXT[] DEFAULT '{}',
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (creator) REFERENCES music_user (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE IF NOT EXISTS playlist_song
+(
+    id       UUID DEFAULT uuid_generate_v4(),
+    playlist UUID NOT NULL,
+    song     UUID NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (playlist) REFERENCES playlist (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (song) REFERENCES song (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE IF NOT EXISTS album
+(
+    id     UUID   DEFAULT uuid_generate_v4(),
+    artist UUID NOT NULL,
+    name   TEXT NOT NULL,
+    tags   TEXT[] DEFAULT '{}',
+    PRIMARY KEY (id),
+    FOREIGN KEY (artist) REFERENCES artist (id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE IF NOT EXISTS album_song
+(
+    id    UUID DEFAULT uuid_generate_v4(),
+    album UUID NOT NULL,
+    song  UUID NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (album) REFERENCES album (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (song) REFERENCES song (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
