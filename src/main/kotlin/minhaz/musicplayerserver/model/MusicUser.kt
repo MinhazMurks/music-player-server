@@ -7,19 +7,21 @@ import javax.persistence.Id
 import javax.persistence.OneToOne
 
 @Entity(name = "music_user")
-class MusicUser() {
+class MusicUser(
     @Column(name = "id")
     @Id
-    lateinit var id: UUID
+    val id: UUID,
 
     @Column(name = "username")
-    lateinit var username: String
+    val username: String,
 
     @Column(name = "email")
-    lateinit var email: String
+    val email: String,
 
     @OneToOne(mappedBy = "musicUser")
-    var artist: Artist? = null
+    val artist: Artist? = null
+
+) {
     override fun toString(): String {
         return "MusicUser(id=$id, username='$username', email='$email', artist=$artist)"
     }

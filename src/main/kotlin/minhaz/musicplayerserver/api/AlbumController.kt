@@ -14,6 +14,7 @@ class AlbumController(
 ) {
     @GetMapping("/feed")
     fun getFeed(): ResponseEntity<AlbumFeedResponse> {
-        return ResponseEntity.ok().body(albumService.getFeed())
+        val response = albumService.getFeed()
+        return ResponseEntity.ok().body(response)
     }
 }

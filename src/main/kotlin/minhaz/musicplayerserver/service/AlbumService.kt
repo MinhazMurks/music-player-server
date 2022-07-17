@@ -9,8 +9,9 @@ class AlbumService(
     private val albumRepository: AlbumRepository
 ) {
     fun getFeed(): AlbumFeedResponse {
+        val albums = albumRepository.findAll()
         return AlbumFeedResponse(
-            albumRepository.findAll()
+            albums
         )
     }
 }

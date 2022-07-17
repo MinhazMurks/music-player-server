@@ -14,6 +14,7 @@ class ArtistController(
 ) {
     @GetMapping("/feed")
     fun getFeed(): ResponseEntity<ArtistFeedResponse> {
-        return ResponseEntity.ok().body(artistService.getFeed())
+        val response = artistService.getFeed()
+        return ResponseEntity.ok().body(response)
     }
 }

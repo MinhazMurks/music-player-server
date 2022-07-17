@@ -17,12 +17,15 @@ class Album {
     @Id
     lateinit var id: UUID
 
-    @Column(name = "name")
-    lateinit var name: String
+    @Column(name = "artist")
+    lateinit var artistUUID: UUID
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "artist")
     lateinit var artist: Artist
+
+    @Column(name = "name")
+    lateinit var name: String
 
     @Type(type = "list-array")
     @Column(name = "tags", columnDefinition = "text[]")

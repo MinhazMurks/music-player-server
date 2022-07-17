@@ -16,25 +16,28 @@ import javax.persistence.ManyToOne
 @TypeDefs(
     TypeDef(name = "list-array", typeClass = ListArrayType::class)
 )
-class Playlist() {
+class Playlist(
     @Column(name = "id")
     @Id
-    lateinit var id: UUID
+    val id: UUID,
 
-    @Column(name = "name")
-    lateinit var name: String
-
-    @Column(name = "is_public")
-    var isPublic: Boolean = false
-
-    @Type(type = "list-array")
-    @Column(name = "tags", columnDefinition = "text[]")
-    lateinit var tags: List<String>
+    @Column(name = "creator")
+    val creatorUUID: UUID,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator")
-    lateinit var creator: MusicUser
+    val creator: MusicUser,
 
+    @Column(name = "name")
+    val name: String,
+
+    @Column(name = "is_public")
+    val isPublic: Boolean = false,
+
+    @Type(type = "list-array")
+    @Column(name = "tags", columnDefinition = "text[]")
+    val tags: List<String>
+) {
     override fun toString(): String {
         return "Playlist(id=$id, name='$name', isPublic=$isPublic, tags=$tags)"
     }

@@ -2,7 +2,6 @@ package minhaz.musicplayerserver.api
 
 import minhaz.musicplayerserver.api.response.PlaylistFeedResponse
 import minhaz.musicplayerserver.repository.MusicUserRepository
-import minhaz.musicplayerserver.repository.PlaylistRepository
 import minhaz.musicplayerserver.repository.SongRepository
 import minhaz.musicplayerserver.service.PlaylistService
 import org.springframework.http.ResponseEntity
@@ -14,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/playlists")
 class PlaylistController(
     private val playlistService: PlaylistService,
-    private val playlistRepository: PlaylistRepository,
     private val songRepository: SongRepository,
     private val musicUserRepository: MusicUserRepository
 ) {
 
     @GetMapping("/feed")
     fun getFeed(): ResponseEntity<PlaylistFeedResponse> {
-        return ResponseEntity.ok().body(playlistService.getFeed())
+        val response = playlistService.getFeed()
+        return ResponseEntity.ok().body(response)
     }
 
     @GetMapping("/test_get")

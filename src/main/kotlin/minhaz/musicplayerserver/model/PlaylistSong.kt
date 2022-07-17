@@ -9,16 +9,18 @@ import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 
 @Entity(name = "playlist_song")
-class PlaylistSong {
-
+class PlaylistSong(
     @Column(name = "id")
     @Id
-    lateinit var id: UUID
+    var id: UUID = UUID.randomUUID(),
 
     @Column(name = "playlist")
-    lateinit var playlistUUID: UUID
+    val playlistUUID: UUID,
+
+    @Column(name = "song")
+    val songUUID: UUID,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "song")
-    var song: Song? = null
-}
+    val song: Song? = null
+)

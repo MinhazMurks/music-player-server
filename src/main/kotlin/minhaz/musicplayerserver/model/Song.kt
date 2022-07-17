@@ -10,23 +10,28 @@ import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
 
 @Entity(name = "song")
-class Song() {
+class Song(
     @Column(name = "id")
     @Id
-    lateinit var id: UUID
+    var id: UUID = UUID.randomUUID(),
 
     @Column(name = "audio_file")
-    lateinit var audioFile: String
+    var audioFile: String,
 
     @Column(name = "name")
-    lateinit var name: String
+    var name: String,
+
+    @Column(name = "artist")
+    var artistUUID: UUID,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "artist")
-    lateinit var artist: Artist
+    var artist: Artist,
 
     @OneToMany(mappedBy = "song", fetch = FetchType.LAZY, orphanRemoval = false)
-    var features: MutableList<Feature> = mutableListOf()
+    var features: MutableList<Feature> = mutableListOf(),
+) {
+
     override fun toString(): String {
         return "Song(id=$id, audioFile='$audioFile', name='$name', artist=$artist, features=$features)"
     }
