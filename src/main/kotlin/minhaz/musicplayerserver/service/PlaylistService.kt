@@ -2,6 +2,8 @@ package minhaz.musicplayerserver.service
 
 import minhaz.musicplayerserver.api.exception.NotFoundException
 import minhaz.musicplayerserver.api.response.PlaylistFeedResponse
+import minhaz.musicplayerserver.api.response.PlaylistResponse
+import minhaz.musicplayerserver.model.Playlist
 import minhaz.musicplayerserver.model.PlaylistSong
 import minhaz.musicplayerserver.repository.PlaylistRepository
 import minhaz.musicplayerserver.repository.PlaylistSongRepository
@@ -18,7 +20,7 @@ class PlaylistService(
     fun getFeed(): PlaylistFeedResponse {
         val playlists = playlistRepository.findAll()
         return PlaylistFeedResponse(
-            playlists
+            buildPlaylistResponse(playlists)
         )
     }
 
@@ -39,5 +41,18 @@ class PlaylistService(
             songUUID = songUUID,
             playlistUUID = playlistUUID
         )
+
+        playlistSongRepository.save(playlistSong)
+    }
+
+    private fun buildPlaylistResponse(playlist: List<Playlist>): List<PlaylistResponse> {
+        return playlist.map {
+            PlaylistResponse(
+                id = it.id,
+                creatorUUID = it.creatorUUID,
+                name = it.name,
+                tags = it.tags
+            )
+        }
     }
 }

@@ -1,6 +1,6 @@
 package minhaz.musicplayerserver.api.response
 
-class ErrorResponse(
+data class ErrorResponse(
     val errorMessage: String?,
     val status: Int?
 )

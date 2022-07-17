@@ -1,7 +1,13 @@
 package minhaz.musicplayerserver.api.response
 
-import minhaz.musicplayerserver.model.Artist
+import java.util.UUID
 
-class ArtistFeedResponse(
-    val artists: List<Artist>
+data class ArtistFeedResponse(
+    val artists: List<ArtistResponse>
+)
+
+data class ArtistResponse(
+    val id: UUID,
+    val musicUserUUID: UUID,
+    val name: String
 )

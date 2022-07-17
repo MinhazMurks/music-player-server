@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/playlists")
+@RequestMapping("/playlist")
 class PlaylistController(
     private val playlistService: PlaylistService,
     private val songRepository: SongRepository,

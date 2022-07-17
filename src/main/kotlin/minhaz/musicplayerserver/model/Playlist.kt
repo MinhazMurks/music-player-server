@@ -4,13 +4,10 @@ import com.vladmihalcea.hibernate.type.array.ListArrayType
 import org.hibernate.annotations.Type
 import org.hibernate.annotations.TypeDef
 import org.hibernate.annotations.TypeDefs
-import java.util.*
+import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.FetchType
 import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToOne
 
 @Entity(name = "playlist")
 @TypeDefs(
@@ -23,10 +20,6 @@ class Playlist(
 
     @Column(name = "creator")
     val creatorUUID: UUID,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "creator")
-    val creator: MusicUser,
 
     @Column(name = "name")
     val name: String,
