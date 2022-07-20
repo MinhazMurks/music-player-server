@@ -10,5 +10,6 @@ data class PlaylistResponse(
     val id: UUID,
     val creatorUUID: UUID,
     val name: String,
+    val art: String,
     val tags: List<String>
 )

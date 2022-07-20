@@ -1,19 +1,19 @@
 package minhaz.musicplayerserver.api.response
 
-import minhaz.musicplayerserver.model.Album
 import java.util.UUID
 
 data class AlbumFeedResponse(
-    val albums: List<Album> = mutableListOf()
+    val albums: List<AlbumResponse> = mutableListOf()
 )
 
 data class AlbumResponse(
     val id: UUID,
     val artistUUID: UUID,
-    val artist: ArtistResponse?,
+    val artist: ArtistResponse? = null,
     val name: String,
+    val art: String,
     val tags: List<String>,
-    var songs: List<AlbumSongResponse>?
+    var songs: List<AlbumSongResponse>? = null
 )
 
 data class AlbumSongResponse(

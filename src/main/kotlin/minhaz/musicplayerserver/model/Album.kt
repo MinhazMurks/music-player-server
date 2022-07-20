@@ -18,6 +18,9 @@ class Album(
     @Column(name = "name")
     val name: String,
 
+    @Column(name = "art")
+    val art: String,
+
     @Type(type = "list-array")
     @Column(name = "tags", columnDefinition = "text[]")
     val tags: List<String>,

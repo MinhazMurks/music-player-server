@@ -24,6 +24,9 @@ class Playlist(
     @Column(name = "name")
     val name: String,
 
+    @Column(name = "art")
+    val art: String,
+
     @Column(name = "is_public")
     val isPublic: Boolean = false,
 

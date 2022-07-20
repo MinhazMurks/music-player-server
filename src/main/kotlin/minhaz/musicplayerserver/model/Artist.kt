@@ -17,7 +17,10 @@ public class Artist(
     val musicUserUUID: UUID,
 
     @Column(name = "name")
-    val name: String
+    val name: String,
+
+    @Column(name = "portrait")
+    val portrait: String
 ) {
     override fun toString(): String {
         return "Artist(id=$id, name='$name')"

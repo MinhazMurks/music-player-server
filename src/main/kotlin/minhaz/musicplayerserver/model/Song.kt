@@ -17,6 +17,9 @@ class Song(
     @Column(name = "name")
     var name: String,
 
+    @Column(name = "art")
+    val art: String,
+
     @Column(name = "artist")
     var artistUUID: UUID
 ) {

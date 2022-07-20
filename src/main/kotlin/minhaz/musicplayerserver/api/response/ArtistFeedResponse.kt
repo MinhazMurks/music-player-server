@@ -9,5 +9,6 @@ data class ArtistFeedResponse(
 data class ArtistResponse(
     val id: UUID,
     val musicUserUUID: UUID,
-    val name: String
+    val name: String,
+    val portrait: String
 )

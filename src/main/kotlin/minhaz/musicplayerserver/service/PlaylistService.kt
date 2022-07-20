@@ -20,7 +20,7 @@ class PlaylistService(
     fun getFeed(): PlaylistFeedResponse {
         val playlists = playlistRepository.findAll()
         return PlaylistFeedResponse(
-            buildPlaylistResponse(playlists)
+            buildPlaylistResponseList(playlists)
         )
     }
 
@@ -45,12 +45,13 @@ class PlaylistService(
         playlistSongRepository.save(playlistSong)
     }
 
-    private fun buildPlaylistResponse(playlist: List<Playlist>): List<PlaylistResponse> {
+    private fun buildPlaylistResponseList(playlist: List<Playlist>): List<PlaylistResponse> {
         return playlist.map {
             PlaylistResponse(
                 id = it.id,
                 creatorUUID = it.creatorUUID,
                 name = it.name,
+                art = it.art,
                 tags = it.tags
             )
         }

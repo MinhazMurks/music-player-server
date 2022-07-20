@@ -31,9 +31,11 @@ values ('603c0051-9f76-4a99-8726-3df89847ecbd', 'aafadcf1-a913-4b0b-923d-fafa8a1
        ('603c0051-9f76-4a99-8726-3df89847ecbd', 'aafadcf1-a913-4b0b-923d-fafa8a157fe5',
         'a283cac0-8951-491e-b55a-68e29f5b7e8c');
 
-insert into album (id, artist, name)
-values ('e8e396a5-f354-456a-a92b-4cd501590af2', 'd7266122-908a-4791-b17a-55f7f9dd0958', 'mental'),
-       ('7aec798e-6652-4efb-a127-c98c94cde4f6', 'a283cac0-8951-491e-b55a-68e29f5b7e8c', 'rainbow');
+insert into album (id, artist, name, art)
+values ('e8e396a5-f354-456a-a92b-4cd501590af2', 'd7266122-908a-4791-b17a-55f7f9dd0958', 'mental',
+        'https://music-server-storage.s3.amazonaws.com/Images/album-placeholder-full.webp'),
+       ('7aec798e-6652-4efb-a127-c98c94cde4f6', 'a283cac0-8951-491e-b55a-68e29f5b7e8c', 'rainbow',
+        'https://music-server-storage.s3.amazonaws.com/Images/album-placeholder-full.webp');
 
 insert into album_song (id, album, song)
 values ('9ac60599-30be-4c1d-a312-01e87394cc35', 'e8e396a5-f354-456a-a92b-4cd501590af2',

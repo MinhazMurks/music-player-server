@@ -15,7 +15,10 @@ class MusicUser(
     val username: String,
 
     @Column(name = "email")
-    val email: String
+    val email: String,
+
+    @Column(name = "profile_picture")
+    val profilePicture: String
 ) {
     override fun toString(): String {
         return "MusicUser(id=$id, username='$username', email='$email')"
