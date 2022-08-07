@@ -17,15 +17,19 @@ class AlbumService(
         )
     }
 
+    private fun buildAlbumResponse(album: Album): AlbumResponse {
+        return AlbumResponse(
+            id = album.id,
+            artistUUID = album.artistUUID,
+            name = album.name,
+            art = album.art,
+            tags = album.tags
+        )
+    }
+
     private fun buildAlbumResponseList(albums: List<Album>): List<AlbumResponse> {
         return albums.map {
-            AlbumResponse(
-                id = it.id,
-                artistUUID = it.artistUUID,
-                name = it.name,
-                art = it.art,
-                tags = it.tags
-            )
+            return@map buildAlbumResponse(it)
         }
     }
 }

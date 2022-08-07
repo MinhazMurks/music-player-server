@@ -24,6 +24,16 @@ class PlaylistService(
         )
     }
 
+    fun getPlaylist(playlistUUID: UUID): PlaylistResponse {
+        val playlist = playlistRepository.findById(playlistUUID)
+
+        if (playlist.isEmpty) {
+            throw NotFoundException("Playlist $playlistUUID was not found.")
+        }
+
+        return buildPlaylistResponse(playlist.get())
+    }
+
     fun addSongToPlaylist(playlistUUID: UUID, songUUID: UUID) {
         val song = songRepository.findById(songUUID)
 
@@ -45,15 +55,19 @@ class PlaylistService(
         playlistSongRepository.save(playlistSong)
     }
 
-    private fun buildPlaylistResponseList(playlist: List<Playlist>): List<PlaylistResponse> {
-        return playlist.map {
-            PlaylistResponse(
-                id = it.id,
-                creatorUUID = it.creatorUUID,
-                name = it.name,
-                art = it.art,
-                tags = it.tags
-            )
+    private fun buildPlaylistResponse(playlist: Playlist): PlaylistResponse {
+        return PlaylistResponse(
+            id = playlist.id,
+            creatorUUID = playlist.creatorUUID,
+            name = playlist.name,
+            art = playlist.art,
+            tags = playlist.tags
+        )
+    }
+
+    private fun buildPlaylistResponseList(playlists: List<Playlist>): List<PlaylistResponse> {
+        return playlists.map {
+            return@map buildPlaylistResponse(it)
         }
     }
 }

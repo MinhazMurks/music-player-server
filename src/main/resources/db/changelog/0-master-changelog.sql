@@ -21,11 +21,12 @@ CREATE TABLE IF NOT EXISTS artist
 
 CREATE TABLE IF NOT EXISTS song
 (
-    id         UUID DEFAULT uuid_generate_v4(),
-    audio_file TEXT NOT NULL,
-    name       TEXT NOT NULL,
-    art        TEXT DEFAULT '',
-    artist     UUID NOT NULL,
+    id             UUID DEFAULT uuid_generate_v4(),
+    audio_file     TEXT NOT NULL,
+    name           TEXT NOT NULL,
+    art            TEXT DEFAULT '',
+    background_art TEXT DEFAULT '',
+    artist         UUID NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (artist) REFERENCES artist (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -42,12 +43,13 @@ CREATE TABLE IF NOT EXISTS feature
 
 CREATE TABLE IF NOT EXISTS playlist
 (
-    id        UUID   DEFAULT uuid_generate_v4(),
-    creator   UUID NOT NULL,
-    name      TEXT NOT NULL,
-    art       TEXT   DEFAULT '',
-    is_public BOOL   DEFAULT FALSE,
-    tags      TEXT[] DEFAULT '{}',
+    id             UUID   DEFAULT uuid_generate_v4(),
+    creator        UUID NOT NULL,
+    name           TEXT NOT NULL,
+    art            TEXT   DEFAULT '',
+    background_art TEXT   DEFAULT '',
+    is_public      BOOL   DEFAULT FALSE,
+    tags           TEXT[] DEFAULT '{}',
     PRIMARY KEY (id),
     FOREIGN KEY (creator) REFERENCES music_user (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -64,11 +66,12 @@ CREATE TABLE IF NOT EXISTS playlist_song
 
 CREATE TABLE IF NOT EXISTS album
 (
-    id     UUID   DEFAULT uuid_generate_v4(),
-    artist UUID NOT NULL,
-    name   TEXT NOT NULL,
-    art    TEXT   DEFAULT '',
-    tags   TEXT[] DEFAULT '{}',
+    id             UUID   DEFAULT uuid_generate_v4(),
+    artist         UUID NOT NULL,
+    name           TEXT NOT NULL,
+    art            TEXT   DEFAULT '',
+    background_art TEXT   DEFAULT '',
+    tags           TEXT[] DEFAULT '{}',
     PRIMARY KEY (id),
     FOREIGN KEY (artist) REFERENCES artist (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
