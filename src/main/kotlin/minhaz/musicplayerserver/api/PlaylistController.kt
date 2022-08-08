@@ -1,7 +1,7 @@
 package minhaz.musicplayerserver.api
 
 import minhaz.musicplayerserver.api.response.PlaylistFeedResponse
-import minhaz.musicplayerserver.api.response.PlaylistResponse
+import minhaz.musicplayerserver.api.response.PlaylistFullResponse
 import minhaz.musicplayerserver.service.PlaylistService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -26,7 +26,7 @@ class PlaylistController(
 
     @GetMapping("/{playlistUUID}")
     @ResponseBody
-    fun getPlaylist(@PathVariable playlistUUID: UUID): ResponseEntity<PlaylistResponse> {
+    fun getPlaylist(@PathVariable playlistUUID: UUID): ResponseEntity<PlaylistFullResponse> {
         val response = playlistService.getPlaylist(playlistUUID)
         return ResponseEntity.ok().body(response)
     }

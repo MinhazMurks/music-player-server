@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface ArtistRepository : JpaRepository<Artist, UUID>
+interface ArtistRepository : CustomArtistRepository
+
+interface CustomArtistRepository : JpaRepository<Artist, UUID>

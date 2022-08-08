@@ -8,8 +8,10 @@ import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.Table
 
-@Entity(name = "playlist")
+@Entity
+@Table(name = "playlist")
 @TypeDefs(
     TypeDef(name = "list-array", typeClass = ListArrayType::class)
 )

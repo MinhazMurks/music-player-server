@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface SongRepository : JpaRepository<Song, UUID>
+interface SongRepository : CustomSongRepository
+
+interface CustomSongRepository : JpaRepository<Song, UUID> {
+    fun getSongByIdIsIn(songIds: List<UUID>)
+}

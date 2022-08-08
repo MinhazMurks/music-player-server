@@ -2,7 +2,6 @@ package minhaz.musicplayerserver.service
 
 import minhaz.musicplayerserver.api.response.AlbumFeedResponse
 import minhaz.musicplayerserver.api.response.AlbumResponse
-import minhaz.musicplayerserver.model.Album
 import minhaz.musicplayerserver.repository.AlbumRepository
 import org.springframework.stereotype.Service
 
@@ -13,23 +12,9 @@ class AlbumService(
     fun getFeed(): AlbumFeedResponse {
         val albums = albumRepository.findAll()
         return AlbumFeedResponse(
-            buildAlbumResponseList(albums)
+            albums.map {
+                return@map AlbumResponse(it, null, null)
+            }
         )
-    }
-
-    private fun buildAlbumResponse(album: Album): AlbumResponse {
-        return AlbumResponse(
-            id = album.id,
-            artistUUID = album.artistUUID,
-            name = album.name,
-            art = album.art,
-            tags = album.tags
-        )
-    }
-
-    private fun buildAlbumResponseList(albums: List<Album>): List<AlbumResponse> {
-        return albums.map {
-            return@map buildAlbumResponse(it)
-        }
     }
 }

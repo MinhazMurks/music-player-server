@@ -4,8 +4,10 @@ import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.Table
 
-@Entity(name = "music_user")
+@Entity
+@Table(name = "music_user")
 class MusicUser(
     @Column(name = "id")
     @Id

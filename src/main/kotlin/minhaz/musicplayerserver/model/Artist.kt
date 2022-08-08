@@ -6,9 +6,9 @@ import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.Table
 
-@Entity()
+@Entity
 @Table(name = "artist")
-public class Artist(
+class Artist(
     @Column(name = "id")
     @Id
     val id: UUID,

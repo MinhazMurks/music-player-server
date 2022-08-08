@@ -1,5 +1,6 @@
 package minhaz.musicplayerserver.api.response
 
+import minhaz.musicplayerserver.model.Artist
 import java.util.UUID
 
 data class ArtistFeedResponse(
@@ -11,4 +12,8 @@ data class ArtistResponse(
     val musicUserUUID: UUID,
     val name: String,
     val portrait: String
-)
+) {
+    constructor(artist: Artist) : this(
+        artist.id, artist.musicUserUUID, artist.name, artist.portrait
+    )
+}
