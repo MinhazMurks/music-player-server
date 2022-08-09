@@ -1,13 +1,10 @@
 package minhaz.musicplayerserver.service
 
 import minhaz.musicplayerserver.api.exception.NotFoundException
-import minhaz.musicplayerserver.api.response.MusicUserResponse
 import minhaz.musicplayerserver.api.response.PlaylistFeedResponse
 import minhaz.musicplayerserver.api.response.PlaylistFullResponse
 import minhaz.musicplayerserver.api.response.PlaylistResponse
-import minhaz.musicplayerserver.api.response.SongResponse
 import minhaz.musicplayerserver.model.PlaylistSong
-import minhaz.musicplayerserver.repository.MusicUserRepository
 import minhaz.musicplayerserver.repository.PlaylistRepository
 import minhaz.musicplayerserver.repository.PlaylistSongRepository
 import minhaz.musicplayerserver.repository.SongRepository
@@ -18,11 +15,10 @@ import java.util.UUID
 class PlaylistService(
     private val playlistRepository: PlaylistRepository,
     private val playlistSongRepository: PlaylistSongRepository,
-    private val musicUserRepository: MusicUserRepository,
     private val songRepository: SongRepository
 ) {
     fun getFeed(): PlaylistFeedResponse {
-        val playlists = playlistRepository.findAll()
+        val playlists = playlistRepository.getAllByTagsNotNull()
         return PlaylistFeedResponse(
             playlists.map {
                 return@map PlaylistResponse(it)
@@ -37,11 +33,9 @@ class PlaylistService(
             throw NotFoundException("Playlist $playlistUUID was not found.")
         }
 
-        val user = musicUserRepository.getMusicUserById(playlist.get().creatorUUID)
-        val songIds = playlistSongRepository.getPlaylistSongsByPlaylistUUID(playlistUUID).map { return@map it.songUUID }
-        val songs = songRepository.getSongsByIdIn(songIds)
-
-        return PlaylistFullResponse(playlist.get(), MusicUserResponse(user), songs.map { return@map SongResponse(it) })
+        return PlaylistFullResponse(
+            playlist.get()
+        )
     }
 
     fun addSongToPlaylist(playlistUUID: UUID, songUUID: UUID) {

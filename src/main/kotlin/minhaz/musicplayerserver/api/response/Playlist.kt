@@ -1,6 +1,7 @@
 package minhaz.musicplayerserver.api.response
 
 import minhaz.musicplayerserver.model.Playlist
+import minhaz.musicplayerserver.model.projections.PlaylistSummary
 import java.util.UUID
 
 data class PlaylistFullResponse(
@@ -8,29 +9,29 @@ data class PlaylistFullResponse(
     val creator: MusicUserResponse,
     val name: String,
     val art: String,
-    val songs: List<SongResponse>,
+    val songs: List<SongFullResponse>,
     val tags: List<String>
 ) {
-    constructor(playlist: Playlist, creator: MusicUserResponse, songs: List<SongResponse>) : this(
+    constructor(playlist: Playlist) : this(
         playlist.id,
-        creator,
+        MusicUserResponse(playlist.creator),
         playlist.name,
         playlist.art,
-        songs,
+        playlist.songs.map { return@map SongFullResponse(it) },
         playlist.tags
     )
 }
 
 data class PlaylistResponse(
     val id: UUID,
-    val creatorUUID: UUID,
+    val creator: MusicUserResponse,
     val name: String,
     val art: String,
     val tags: List<String>
 ) {
-    constructor(playlist: Playlist) : this(
+    constructor(playlist: PlaylistSummary) : this(
         playlist.id,
-        playlist.creatorUUID,
+        MusicUserResponse(playlist.creator),
         playlist.name,
         playlist.art,
         playlist.tags

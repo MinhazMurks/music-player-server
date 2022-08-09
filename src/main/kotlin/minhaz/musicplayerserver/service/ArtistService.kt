@@ -1,6 +1,5 @@
 package minhaz.musicplayerserver.service
 
-import minhaz.musicplayerserver.api.exception.NotFoundException
 import minhaz.musicplayerserver.api.response.ArtistFeedResponse
 import minhaz.musicplayerserver.api.response.ArtistResponse
 import minhaz.musicplayerserver.repository.ArtistRepository
@@ -12,7 +11,7 @@ class ArtistService(
     private val artistRepository: ArtistRepository
 ) {
     fun getFeed(): ArtistFeedResponse {
-        val artists = artistRepository.findAll()
+        val artists = artistRepository.getAllByIdIsNotNull()
         return ArtistFeedResponse(
             artists.map {
                 return@map ArtistResponse(it)
@@ -21,12 +20,8 @@ class ArtistService(
     }
 
     fun getArtist(artistUUID: UUID): ArtistResponse {
-        val artist = artistRepository.findById(artistUUID)
+        val artist = artistRepository.getArtistById(artistUUID)
 
-        if (artist.isEmpty) {
-            throw NotFoundException("Artist $artistUUID was not found.")
-        }
-
-        return ArtistResponse(artist.get())
+        return ArtistResponse(artist)
     }
 }

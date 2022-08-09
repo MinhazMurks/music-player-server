@@ -1,7 +1,7 @@
 package minhaz.musicplayerserver.api.response
 
-import minhaz.musicplayerserver.model.Album
 import minhaz.musicplayerserver.model.AlbumSong
+import minhaz.musicplayerserver.model.projections.AlbumSummary
 import java.util.UUID
 
 data class AlbumSongResponse(
@@ -15,20 +15,16 @@ data class AlbumSongResponse(
 data class AlbumResponse(
     val id: UUID,
     val artistUUID: UUID,
-    val artist: ArtistResponse? = null,
     val name: String,
     val art: String,
-    val tags: List<String>,
-    var songs: List<AlbumSongResponse>? = null
+    val tags: List<String>
 ) {
-    constructor(album: Album, artist: ArtistResponse?, songs: List<AlbumSongResponse>?) : this(
+    constructor(album: AlbumSummary) : this(
         album.id,
         album.artistUUID,
-        artist,
         album.name,
         album.art,
         album.tags,
-        songs
     )
 }
 

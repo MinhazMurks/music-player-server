@@ -4,6 +4,10 @@ import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.JoinTable
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
 import javax.persistence.Table
 
 @Entity
@@ -23,7 +27,19 @@ class Song(
     val art: String,
 
     @Column(name = "artist")
-    var artistUUID: UUID
+    val artistUUID: UUID,
+
+    @ManyToOne
+    @JoinColumn(name = "artist", referencedColumnName = "id", insertable = false, updatable = false)
+    var artist: Artist,
+
+    @OneToMany
+    @JoinTable(
+        name = "feature",
+        joinColumns = [JoinColumn(name = "Artist_id")],
+        inverseJoinColumns = [JoinColumn(name = "Song_id")]
+    )
+    var featuredArtists: List<Artist>
 ) {
 
     override fun toString(): String {

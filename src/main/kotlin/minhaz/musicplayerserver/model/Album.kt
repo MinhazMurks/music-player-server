@@ -5,6 +5,9 @@ import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.JoinTable
+import javax.persistence.OneToMany
 import javax.persistence.Table
 
 @Entity
@@ -26,6 +29,14 @@ class Album(
     @Type(type = "list-array")
     @Column(name = "tags", columnDefinition = "text[]")
     val tags: List<String>,
+
+    @OneToMany
+    @JoinTable(
+        name = "album_song",
+        joinColumns = [JoinColumn(name = "song", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "album", referencedColumnName = "id")]
+    )
+    val songs: List<Song>
 ) {
     override fun toString(): String {
         return "Album(id=$id, name='$name', tags=$tags)"

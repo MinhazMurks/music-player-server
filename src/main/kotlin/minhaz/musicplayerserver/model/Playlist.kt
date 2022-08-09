@@ -8,6 +8,10 @@ import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.JoinTable
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
 import javax.persistence.Table
 
 @Entity
@@ -20,8 +24,9 @@ class Playlist(
     @Id
     val id: UUID,
 
-    @Column(name = "creator")
-    val creatorUUID: UUID,
+    @ManyToOne
+    @JoinColumn(name = "creator", referencedColumnName = "id")
+    val creator: MusicUser,
 
     @Column(name = "name")
     val name: String,
@@ -34,7 +39,15 @@ class Playlist(
 
     @Type(type = "list-array")
     @Column(name = "tags", columnDefinition = "text[]")
-    val tags: List<String>
+    val tags: List<String>,
+
+    @OneToMany
+    @JoinTable(
+        name = "playlist_song",
+        joinColumns = [JoinColumn(name = "song", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "playlist", referencedColumnName = "id")]
+    )
+    val songs: List<Song>
 ) {
     override fun toString(): String {
         return "Playlist(id=$id, name='$name', isPublic=$isPublic, tags=$tags)"

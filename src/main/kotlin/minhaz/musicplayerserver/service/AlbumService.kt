@@ -10,10 +10,10 @@ class AlbumService(
     private val albumRepository: AlbumRepository
 ) {
     fun getFeed(): AlbumFeedResponse {
-        val albums = albumRepository.findAll()
+        val albums = albumRepository.getAllByTagsNotNull()
         return AlbumFeedResponse(
             albums.map {
-                return@map AlbumResponse(it, null, null)
+                return@map AlbumResponse(it)
             }
         )
     }

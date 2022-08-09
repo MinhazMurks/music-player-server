@@ -1,6 +1,7 @@
 package minhaz.musicplayerserver.api.response
 
 import minhaz.musicplayerserver.model.Song
+import minhaz.musicplayerserver.model.projections.SongSummary
 import java.util.UUID
 
 data class SongFullResponse(
@@ -8,9 +9,9 @@ data class SongFullResponse(
     val audioFile: String,
     val name: String,
     val art: String,
-    val artistId: ArtistResponse
+    val artist: ArtistResponse
 ) {
-    constructor(song: Song, artist: ArtistResponse) : this(song.id, song.audioFile, song.name, song.art, artist)
+    constructor(song: Song) : this(song.id, song.audioFile, song.name, song.art, ArtistResponse(song.artist))
 }
 
 data class SongResponse(
@@ -20,7 +21,7 @@ data class SongResponse(
     val art: String,
     val artistId: UUID
 ) {
-    constructor(song: Song) : this(song.id, song.audioFile, song.name, song.art, song.artistUUID)
+    constructor(song: SongSummary) : this(song.id, song.audioFile, song.name, song.art, song.artistUUID)
 }
 
 data class SongFeedResponse(
