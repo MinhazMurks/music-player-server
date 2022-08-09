@@ -8,4 +8,6 @@ import java.util.UUID
 @Repository
 interface ArtistRepository : CustomArtistRepository
 
-interface CustomArtistRepository : JpaRepository<Artist, UUID>
+interface CustomArtistRepository : JpaRepository<Artist, UUID> {
+    fun getArtistByMusicUserUUID(musicUserUUID: UUID): Artist
+}

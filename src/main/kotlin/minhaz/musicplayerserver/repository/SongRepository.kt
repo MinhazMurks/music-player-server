@@ -9,5 +9,5 @@ import java.util.UUID
 interface SongRepository : CustomSongRepository
 
 interface CustomSongRepository : JpaRepository<Song, UUID> {
-    fun getSongByIdIsIn(songIds: List<UUID>)
+    fun getSongsByIdIn(songIds: List<UUID>): List<Song>
 }

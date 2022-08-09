@@ -5,13 +5,13 @@ import java.util.UUID
 
 data class PlaylistFullResponse(
     val id: UUID,
-    val creator: ArtistResponse,
+    val creator: MusicUserResponse,
     val name: String,
     val art: String,
     val songs: List<SongResponse>,
     val tags: List<String>
 ) {
-    constructor(playlist: Playlist, creator: ArtistResponse, songs: List<SongResponse>) : this(
+    constructor(playlist: Playlist, creator: MusicUserResponse, songs: List<SongResponse>) : this(
         playlist.id,
         creator,
         playlist.name,

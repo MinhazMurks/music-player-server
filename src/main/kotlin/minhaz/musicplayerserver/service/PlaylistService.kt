@@ -1,12 +1,13 @@
 package minhaz.musicplayerserver.service
 
 import minhaz.musicplayerserver.api.exception.NotFoundException
-import minhaz.musicplayerserver.api.response.ArtistResponse
+import minhaz.musicplayerserver.api.response.MusicUserResponse
 import minhaz.musicplayerserver.api.response.PlaylistFeedResponse
 import minhaz.musicplayerserver.api.response.PlaylistFullResponse
 import minhaz.musicplayerserver.api.response.PlaylistResponse
+import minhaz.musicplayerserver.api.response.SongResponse
 import minhaz.musicplayerserver.model.PlaylistSong
-import minhaz.musicplayerserver.repository.ArtistRepository
+import minhaz.musicplayerserver.repository.MusicUserRepository
 import minhaz.musicplayerserver.repository.PlaylistRepository
 import minhaz.musicplayerserver.repository.PlaylistSongRepository
 import minhaz.musicplayerserver.repository.SongRepository
@@ -17,7 +18,7 @@ import java.util.UUID
 class PlaylistService(
     private val playlistRepository: PlaylistRepository,
     private val playlistSongRepository: PlaylistSongRepository,
-    private val artistRepository: ArtistRepository,
+    private val musicUserRepository: MusicUserRepository,
     private val songRepository: SongRepository
 ) {
     fun getFeed(): PlaylistFeedResponse {
@@ -36,10 +37,11 @@ class PlaylistService(
             throw NotFoundException("Playlist $playlistUUID was not found.")
         }
 
-        val artist = artistRepository.findById(playlist.get().creatorUUID)
-        val songs = playlistSongRepository.getPlaylistSongsByPlaylistUUID(playlistUUID)
+        val user = musicUserRepository.getMusicUserById(playlist.get().creatorUUID)
+        val songIds = playlistSongRepository.getPlaylistSongsByPlaylistUUID(playlistUUID).map { return@map it.songUUID }
+        val songs = songRepository.getSongsByIdIn(songIds)
 
-        return PlaylistFullResponse(playlist.get(), ArtistResponse(artist.get()), emptyList())
+        return PlaylistFullResponse(playlist.get(), MusicUserResponse(user), songs.map { return@map SongResponse(it) })
     }
 
     fun addSongToPlaylist(playlistUUID: UUID, songUUID: UUID) {

@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface MusicUserRepository : JpaRepository<MusicUser, UUID>
+interface MusicUserRepository : CustomMusicUserRepository
+
+interface CustomMusicUserRepository : JpaRepository<MusicUser, UUID> {
+    fun getMusicUserById(id: UUID): MusicUser
+}
