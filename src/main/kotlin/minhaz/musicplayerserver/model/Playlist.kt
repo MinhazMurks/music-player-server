@@ -25,7 +25,7 @@ class Playlist(
     val id: UUID,
 
     @ManyToOne
-    @JoinColumn(name = "creator", referencedColumnName = "id")
+    @JoinColumn(name = "creator", referencedColumnName = "id", insertable = false, updatable = false)
     val creator: MusicUser,
 
     @Column(name = "name")
