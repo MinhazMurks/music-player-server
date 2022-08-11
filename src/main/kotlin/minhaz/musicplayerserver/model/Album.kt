@@ -38,8 +38,8 @@ class Album(
     @OneToMany
     @JoinTable(
         name = "album_song",
-        joinColumns = [JoinColumn(name = "song", referencedColumnName = "id")],
-        inverseJoinColumns = [JoinColumn(name = "album", referencedColumnName = "id")]
+        joinColumns = [JoinColumn(name = "album", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "song", referencedColumnName = "id")]
     )
     val songs: List<Song>
 ) {

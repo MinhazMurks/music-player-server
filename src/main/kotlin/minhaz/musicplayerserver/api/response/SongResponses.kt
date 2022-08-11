@@ -18,10 +18,20 @@ data class SongResponse(
     val id: UUID,
     val audioFile: String,
     val name: String,
+    val length: Int,
     val art: String,
-    val artistId: UUID
+    val artistId: UUID,
+    val explicit: Boolean
 ) {
-    constructor(song: SongSummary) : this(song.id, song.audioFile, song.name, song.art, song.artistUUID)
+    constructor(song: SongSummary) : this(
+        song.id,
+        song.audioFile,
+        song.name,
+        song.length,
+        song.art,
+        song.artistUUID,
+        song.explicit
+    )
 }
 
 data class SongFeedResponse(

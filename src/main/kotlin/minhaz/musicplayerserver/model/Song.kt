@@ -23,6 +23,9 @@ class Song(
     @Column(name = "name")
     var name: String,
 
+    @Column(name = "length")
+    var length: Int,
+
     @Column(name = "art")
     val art: String,
 
@@ -32,6 +35,9 @@ class Song(
     @ManyToOne
     @JoinColumn(name = "artist", referencedColumnName = "id", insertable = false, updatable = false)
     var artist: Artist,
+
+    @Column(name = "explicit")
+    val explicit: Boolean,
 
     @OneToMany
     @JoinTable(

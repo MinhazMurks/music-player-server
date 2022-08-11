@@ -21,12 +21,15 @@ CREATE TABLE IF NOT EXISTS artist
 
 CREATE TABLE IF NOT EXISTS song
 (
-    id             UUID DEFAULT uuid_generate_v4(),
+    id             UUID    DEFAULT uuid_generate_v4(),
     audio_file     TEXT NOT NULL,
     name           TEXT NOT NULL,
-    art            TEXT DEFAULT '',
-    background_art TEXT DEFAULT '',
+    length         INT     DEFAULT 0,
+    art            TEXT    DEFAULT '',
+    background_art TEXT    DEFAULT '',
     artist         UUID NOT NULL,
+    explicit       BOOLEAN DEFAULT false,
+    tags           TEXT[]  DEFAULT '{}',
     PRIMARY KEY (id),
     FOREIGN KEY (artist) REFERENCES artist (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );

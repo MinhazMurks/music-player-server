@@ -23,7 +23,8 @@ values ('a283cac0-8951-491e-b55a-68e29f5b7e8c', '7d45f414-72bb-465f-ae72-0deef85
        ('53e7d574-ad04-49e5-9079-4de6c152e5ca', '7d45f414-72bb-465f-ae72-0deef85c11c4');
 
 insert into playlist (id, creator, name)
-values ('aafadcf1-a913-4b0b-923d-fafa8a157fe5', '786a5b4d-4c1a-402c-9328-821cab655405', 'best playlist ever');
+values ('aafadcf1-a913-4b0b-923d-fafa8a157fe5', '786a5b4d-4c1a-402c-9328-821cab655405', 'best playlist ever'),
+       ('82955428-b6a0-4b48-8126-466ae806eeae', 'b3d9898e-14c6-4879-90b9-f09fd3f09952', 'worst playlist ever');
 
 insert into playlist_song (id, playlist, song)
 values ('603c0051-9f76-4a99-8726-3df89847ecbd', 'aafadcf1-a913-4b0b-923d-fafa8a157fe5',
