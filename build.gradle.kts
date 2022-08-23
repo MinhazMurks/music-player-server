@@ -29,6 +29,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.vladmihalcea:hibernate-types-52:2.10.0")
+    implementation("aws.sdk.kotlin:s3:0.17.5-beta")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

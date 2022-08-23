@@ -45,6 +45,7 @@ class SongController(
                 }
             }
         }
+
         return ResponseEntity.ok()
             .contentType(MediaType.TEXT_PLAIN)
             .body(responseBody)
