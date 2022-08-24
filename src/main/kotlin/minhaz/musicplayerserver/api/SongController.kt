@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody
-import java.io.OutputStream
 import java.util.UUID
 
 @RestController
@@ -34,20 +32,12 @@ class SongController(
     }
 
     @GetMapping(value = ["/test-stream"])
-    fun streamData(): ResponseEntity<StreamingResponseBody?>? {
-        val responseBody = StreamingResponseBody { response: OutputStream ->
-            for (i in 1..1000) {
-                try {
-                    Thread.sleep(10)
-                    response.write("Data stream line - $i\n".toByteArray())
-                } catch (e: InterruptedException) {
-                    e.printStackTrace()
-                }
-            }
-        }
+    suspend fun streamData(): ResponseEntity<String?>? {
+
+        songService.test()
 
         return ResponseEntity.ok()
             .contentType(MediaType.TEXT_PLAIN)
-            .body(responseBody)
+            .body("awesome")
     }
 }
