@@ -7,6 +7,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.noarg") version "1.7.0"
     kotlin("jvm") version "1.7.0"
     kotlin("plugin.spring") version "1.7.0"
+    application
 }
 
 group = "minhaz"
